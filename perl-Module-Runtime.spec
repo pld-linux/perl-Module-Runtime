@@ -8,13 +8,13 @@
 Summary:	Module::Runtime - runtime module handling
 Summary(pl.UTF-8):	Module::Runtime - obsługa modułów w czasie działania
 Name:		perl-Module-Runtime
-Version:	0.013
+Version:	0.014
 Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-module/Module/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	62b88b1f5f0e975a5d7c80cd46167b97
+# Source0-md5:	a6597bc25536a30476f0d75b64d35734
 URL:		http://search.cpan.org/dist/Module-Runtime/
 BuildRequires:	perl-Module-Build
 BuildRequires:	perl-devel >= 1:5.8.0
