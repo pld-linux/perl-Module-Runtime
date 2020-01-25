@@ -4,7 +4,6 @@
 #
 %define		pdir	Module
 %define		pnam	Runtime
-%include	/usr/lib/rpm/macros.perl
 Summary:	Module::Runtime - runtime module handling
 Summary(pl.UTF-8):	Module::Runtime - obsługa modułów w czasie działania
 Name:		perl-Module-Runtime
