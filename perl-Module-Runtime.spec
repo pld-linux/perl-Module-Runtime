@@ -1,21 +1,21 @@
 #
 # Conditional build:
-%bcond_without	tests		# do not perform "make test"
+%bcond_without	tests	# unit tests
 #
 %define		pdir	Module
 %define		pnam	Runtime
 Summary:	Module::Runtime - runtime module handling
 Summary(pl.UTF-8):	Module::Runtime - obsługa modułów w czasie działania
 Name:		perl-Module-Runtime
-Version:	0.016
+Version:	0.018
 Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
-Source0:	http://www.cpan.org/modules/by-module/Module/%{pdir}-%{pnam}-%{version}.tar.gz
-# Source0-md5:	d3d47222fa2e3dfcb4526f6cc8437b20
-URL:		https://metacpan.org/release/Module-Runtime
-BuildRequires:	perl-Module-Build
+Source0:	https://www.cpan.org/modules/by-module/Module/%{pdir}-%{pnam}-%{version}.tar.gz
+# Source0-md5:	455eedb62183b9d9e437c59c375c1054
+URL:		https://metacpan.org/dist/Module-Runtime
+BuildRequires:	perl-ExtUtils-MakeMaker
 %{?with_tests:BuildRequires:	perl-Test-Simple >= 0.41}
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
@@ -36,23 +36,24 @@ kompilacji.
 %setup -q -n %{pdir}-%{pnam}-%{version}
 
 %build
-%{__perl} Build.PL \
-	destdir=$RPM_BUILD_ROOT \
-	installdirs=vendor
-./Build
+%{__perl} Makefile.PL \
+	INSTALLDIRS=vendor
 
-%{?with_tests:./Build test}
+%{__make}
+
+%{?with_tests:%{__make} test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-./Build install
+%{__make} pure_install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc Changes README
+%doc Changes TODO
 %{perl_vendorlib}/Module/Runtime.pm
 %{_mandir}/man3/Module::Runtime.3pm*
